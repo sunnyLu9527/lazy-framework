@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/lazy-cache/lazy-cache.iml" filepath="$PROJECT_DIR$/lazy-cache/lazy-cache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lazy-framework.iml" filepath="$PROJECT_DIR$/lazy-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lazy-session/lazy-session.iml" filepath="$PROJECT_DIR$/lazy-session/lazy-session.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lazy-validate/lazy-validate.iml" filepath="$PROJECT_DIR$/lazy-validate/lazy-validate.iml" />
+    </modules>
+  </component>
+</project>

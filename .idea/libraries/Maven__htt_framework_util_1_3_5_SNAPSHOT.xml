@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: htt-framework:util:1.3.5-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/htt-framework/util/1.3.5-SNAPSHOT/util-1.3.5-20170109.090335-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/htt-framework/util/1.3.5-SNAPSHOT/util-1.3.5-20170109.090335-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/htt-framework/util/1.3.5-SNAPSHOT/util-1.3.5-20170109.090335-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
