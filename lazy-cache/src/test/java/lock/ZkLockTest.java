@@ -16,16 +16,17 @@ public class ZkLockTest {
         CountDownLatch cd = new CountDownLatch(1);
         for (int i = 0; i < 10; i++) {
             new Thread(() -> {
+                ZkLock zkLock = new ZkLock("/test");
                 try {
                     cd.await();
-                    ZkLock zkLock = new ZkLock("/test");
                     zkLock.lock();
                     System.out.println(Thread.currentThread().getId()+"获取到锁，执行业务...");
                     Thread.sleep(500);
-                    zkLock.releaseLock();
                     System.out.println(Thread.currentThread().getId()+"业务执行完毕，释放锁...");
                 } catch (Exception e){
                     e.printStackTrace();
+                } finally {
+                    zkLock.releaseLock();
                 }
             }).start();
         }
