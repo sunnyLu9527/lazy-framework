@@ -64,7 +64,7 @@ public class LockSupport {
             logger.error("竞争锁失败...lockKey:"+lockKey+";requestId:"+requestId);
             return Boolean.FALSE;
         } catch (Exception e) {
-            logger.error("加锁异常！",e);
+            logger.error("RedisLockException:",e);
             return Boolean.FALSE;
         } finally {
             JedisUtils.returnJedis(jedis);
@@ -89,7 +89,7 @@ public class LockSupport {
             }
             return Boolean.FALSE;
         } catch (Exception e) {
-            logger.error("锁释放异常！",e);
+            logger.error("RedisLockException:",e);
             return Boolean.FALSE;
         } finally {
             JedisUtils.returnJedis(jedis);
