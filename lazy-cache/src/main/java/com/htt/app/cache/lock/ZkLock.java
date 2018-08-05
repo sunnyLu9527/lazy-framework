@@ -19,6 +19,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * 基于zookeeper的分布式锁
  * 单元测试见 ZkLockTest.java
+ *  @see ZkCuratorLock   本类仅为了了解zk锁实现机制，如须要企业使用请使用ZkCuratorLock
  */
 public class ZkLock {
 

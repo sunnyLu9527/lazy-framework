@@ -1,9 +1,11 @@
 package lock;
 
+import com.htt.app.cache.lock.ZkCuratorLock;
 import com.htt.app.cache.lock.ZkLock;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class ZkLockTest {
 
@@ -34,6 +36,40 @@ public class ZkLockTest {
         try {//这里junit须要睡一下，否则单元测试跑完资源立即释放
             System.out.println("睡一下");
             Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 基于InterProcessMutex的zk分布式锁测试
+     */
+    @Test
+    public void testLock1(){
+
+        CountDownLatch cd = new CountDownLatch(1);
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                ZkCuratorLock zkLock = new ZkCuratorLock("/lock/test");
+                try {
+                    cd.await();
+                    if (!zkLock.acquire(1, TimeUnit.SECONDS)){
+                        System.out.println(Thread.currentThread().getId()+"请求锁超时...");
+                        return;
+                    }
+                    System.out.println(Thread.currentThread().getId()+"获取到锁，执行业务...");
+                    Thread.sleep(500);
+                    System.out.println(Thread.currentThread().getId()+"业务执行完毕，释放锁...");
+                    zkLock.release();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+        cd.countDown();
+        try {//这里junit须要睡一下，否则单元测试跑完资源立即释放
+            System.out.println("睡一下");
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
