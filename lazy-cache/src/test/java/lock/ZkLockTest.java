@@ -50,17 +50,18 @@ public class ZkLockTest {
         CountDownLatch cd = new CountDownLatch(1);
         for (int i = 0; i < 10; i++) {
             new Thread(() -> {
-                ZkCuratorLock zkLock = new ZkCuratorLock("/lock/test");
+                ZkCuratorLock zkLock = new ZkCuratorLock("/lock/test2");
                 try {
                     cd.await();
-                    if (!zkLock.acquire(1, TimeUnit.SECONDS)){
+                    if (!zkLock.acquire(8, TimeUnit.SECONDS)){
                         System.out.println(Thread.currentThread().getId()+"请求锁超时...");
                         return;
                     }
                     System.out.println(Thread.currentThread().getId()+"获取到锁，执行业务...");
-                    Thread.sleep(500);
+                    Thread.sleep(10000);
                     System.out.println(Thread.currentThread().getId()+"业务执行完毕，释放锁...");
                     zkLock.release();
+                    zkLock.close();
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -69,7 +70,7 @@ public class ZkLockTest {
         cd.countDown();
         try {//这里junit须要睡一下，否则单元测试跑完资源立即释放
             System.out.println("睡一下");
-            Thread.sleep(10000);
+            Thread.sleep(100000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
